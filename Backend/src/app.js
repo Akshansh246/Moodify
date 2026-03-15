@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const authRouter = require('./routes/auth.route');
 const cors = require('cors')
 
 
@@ -13,10 +12,17 @@ app.use(cors({
     credentials:true
 }))
 
-
 app.use(express.json())
 app.use(cookieParser())
-app.use('/api/auth', authRouter)
+/**
+ * Routes
+ */
 
+const authRouter = require('./routes/auth.route');
+const songRouter = require('./routes/song.route');
+
+
+app.use('/api/auth', authRouter)
+app.use('/api/songs', songRouter)
 
 module.exports = app
