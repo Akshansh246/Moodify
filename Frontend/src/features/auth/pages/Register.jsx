@@ -11,21 +11,20 @@ const Register = () => {
     const {loading, handleRegister} = useAuth()
     const navigate = useNavigate()
 
+    if (loading) {
+        return <Loading/>
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
         await handleRegister({username, email, password})
         navigate('/')
     }
 
-    if (loading) {
-        return(
-            <Loading/>
-        )
-    }
 
     return (
-        <main className="w-full h-full flex justify-center items-center">
-        <div className="w-130 h-150 bg-linear-to-bl from-indigo-500 to-purple-600 text-stone-50 flex flex-col justify-center p-10 gap-7 rounded-l-2xl">
+        <main className="w-full lg:h-full flex flex-col lg:flex-row justify-center items-center">
+        <div className="w-full lg:w-130 lg:h-150 bg-linear-to-bl from-indigo-500 to-purple-600 text-stone-50 flex flex-col justify-center p-10 gap-7 lg:rounded-l-2xl">
             <div className="flex items-center gap-1.5">
                 <svg
                     className="w-12"
@@ -37,7 +36,7 @@ const Register = () => {
                 </svg>
                 <h2 className="font-bold text-2xl">Moodify</h2>
             </div>
-            <h3 className="text-4xl font-bold">
+            <h3 className="text-3xl lg:text-4xl font-bold">
                 Start Your journey to emotional well-being
             </h3>
             <div className="flex flex-col gap-2">
@@ -53,9 +52,14 @@ const Register = () => {
                 listening to music according to their mood, finding peace in their
                 lives.
             </p>
+            <div className="w-full flex items-center justify-end lg:hidden">
+                <div className="bg-white w-fit rounded-full p-2">
+                    <svg className="w-10 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path></svg>
+                </div>
+            </div>
         </div>
 
-        <div className="bg-white h-160 w-130 rounded-2xl p-10 flex flex-col gap-7 shadow-lg shadow-black/50">
+        <div className="bg-white w-full lg:h-160 lg:w-130 lg:rounded-2xl p-10 flex flex-col gap-7 shadow-lg shadow-black/50">
             <div>
                 <h2 className="text-2xl font-bold">Create Account</h2>
                 <p className="text-black/50">
