@@ -49,7 +49,17 @@ async function getSongController(req, res) {
     })
 }
 
+async function getAllSongController(req, res) {
+    const songs = await songModel.find()
+
+    res.status(200).json({
+        message:"Songs Fetched Successfully",
+        songs
+    })
+}
+
 module.exports = {
     addSongController,
-    getSongController
+    getSongController,
+    getAllSongController
 }

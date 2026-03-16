@@ -8,10 +8,10 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
-    const {loading, handleRegister} = useAuth()
+    const {user, loading, handleRegister} = useAuth()
     const navigate = useNavigate()
 
-    if (loading) {
+    if (user && loading) {
         return <Loading/>
     }
 

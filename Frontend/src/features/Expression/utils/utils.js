@@ -3,11 +3,10 @@ import {
   FilesetResolver
 } from "@mediapipe/tasks-vision";
 
-
-export const init = async ({landmarkerRef, videoRef, streamRef}) => {
+export const init = async ({ landmarkerRef, videoRef, streamRef }) => {
   // Load MediaPipe vision tasks
   const vision = await FilesetResolver.forVisionTasks(
-    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm",
+    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
   );
 
   // Create face landmarker
@@ -26,40 +25,61 @@ export const init = async ({landmarkerRef, videoRef, streamRef}) => {
 
   videoRef.current.srcObject = streamRef.current;
   await videoRef.current.play();
-
 };
 
-export const detect = ({landmarkerRef, videoRef, setExpression}) => {
+export const detect = ({
+  landmarkerRef,
+  videoRef,
+  setExpression,
+  setConfidence,
+  setEmoji
+}) => {
   if (!landmarkerRef.current || !videoRef.current) return;
 
   const results = landmarkerRef.current.detectForVideo(
     videoRef.current,
-    performance.now(),
+    performance.now()
   );
 
-  if (results.faceBlendshapes?.length > 0) {
-    const blendshapes = results.faceBlendshapes[0].categories;
-
-    const getScore = (name) =>
-      blendshapes.find((b) => b.categoryName === name)?.score || 0;
-
-    const smileLeft = getScore("mouthSmileLeft");
-    const smileRight = getScore("mouthSmileRight");
-    const jawOpen = getScore("jawOpen");
-    const browUp = getScore("browInnerUp");
-    const frownLeft = getScore("mouthFrownLeft");
-    const frownRight = getScore("mouthFrownRight");
-
-    let currentExpression = "Neutral 😐";
-
-    if (smileLeft > 0.5 && smileRight > 0.5) {
-      currentExpression = "Happy 😄";
-    } else if (jawOpen > 0.6 && browUp > 0.5) {
-      currentExpression = "Surprised 😲";
-    } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
-      currentExpression = "Sad 😢";
-    }
-
-    setExpression(currentExpression);
+  if (!results.faceBlendshapes || results.faceBlendshapes.length === 0) {
+    setExpression("No face detected");
+    setConfidence(null);
+    return;
   }
+
+  const blendshapes = results.faceBlendshapes[0].categories;
+
+  const getScore = (name) =>
+    blendshapes.find((b) => b.categoryName === name)?.score || 0;
+
+  const smileLeft = getScore("mouthSmileLeft");
+  const smileRight = getScore("mouthSmileRight");
+  const jawOpen = getScore("jawOpen");
+  const browUp = getScore("browInnerUp");
+  const frownLeft = getScore("mouthFrownLeft");
+  const frownRight = getScore("mouthFrownRight");
+
+  let currentExpression = "Neutral";
+  let currentEmoji = '😐';
+  let confidence = 0;
+
+  if (smileLeft > 0.5 && smileRight > 0.5) {
+    currentExpression = "Happy/Energetic";
+    currentEmoji = '😄'
+    confidence = (smileLeft + smileRight) / 2;
+  } else if (jawOpen > 0.6 && browUp > 0.5) {
+    currentExpression = "Surprised/Awestruck";
+    currentEmoji = '😲'
+    confidence = (jawOpen + browUp) / 2;
+  } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
+    currentExpression = "Sad/Melancholy";
+    currentEmoji = '😢'
+    confidence = (frownLeft + frownRight) / 2;
+  } else {
+    confidence = 0.5;
+  }
+
+  setExpression(currentExpression);
+  setConfidence(confidence);
+  setEmoji(currentEmoji)
 };

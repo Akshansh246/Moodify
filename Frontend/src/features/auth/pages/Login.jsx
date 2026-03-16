@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router';
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {loading, handleLogin} = useAuth();
+    const {user, loading, handleLogin} = useAuth();
     const navigate = useNavigate()
 
-    if (loading) {
+    if (user && loading) {
         return <Loading/>
     }
 

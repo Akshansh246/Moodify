@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../auth.context";
 import { getMe, loginUser, logoutUser, registerUser } from "../services/auth.api";
 
@@ -35,10 +35,6 @@ export const useAuth = ()=>{
         setLoading(false)
     }
 
-    useEffect(()=>{
-        handleGetMe()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
 
     return({
         user, loading, handleRegister, handleLogin, handleGetMe, handleLogout

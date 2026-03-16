@@ -17,4 +17,11 @@ songRouter.post('/',upload.single('song'), songController.addSongController)
  */
 songRouter.get('/', songController.getSongController)
 
+/**
+ * @route /api/songs/all
+ * @method GET
+ * @description returns all the songs
+ */
+songRouter.get('/all', songController.getAllSongController)
+
 module.exports = songRouter
