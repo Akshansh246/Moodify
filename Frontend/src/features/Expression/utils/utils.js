@@ -64,22 +64,25 @@ export const detect = ({
   let confidence = 0;
 
   if (smileLeft > 0.5 && smileRight > 0.5) {
-    currentExpression = "Happy/Energetic";
+    currentExpression = "happy";
     currentEmoji = '😄'
     confidence = (smileLeft + smileRight) / 2;
   } else if (jawOpen > 0.6 && browUp > 0.5) {
-    currentExpression = "Surprised/Awestruck";
+    currentExpression = "surprised";
     currentEmoji = '😲'
     confidence = (jawOpen + browUp) / 2;
   } else if (frownLeft > 0.0001 && frownRight > 0.0001) {
-    currentExpression = "Sad/Melancholy";
+    currentExpression = "sad";
     currentEmoji = '😢'
     confidence = (frownLeft + frownRight) / 2;
   } else {
     confidence = 0.5;
   }
 
+
   setExpression(currentExpression);
   setConfidence(confidence);
   setEmoji(currentEmoji)
-};
+
+  return currentExpression
+}

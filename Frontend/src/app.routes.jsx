@@ -3,6 +3,7 @@ import Login from './features/auth/pages/Login'
 import Register from './features/auth/pages/Register'
 import Protected from './features/auth/components/Protected'
 import Home from './features/home/pages/Home'
+import MusicLibrary from './features/home/pages/MusicLibrary'
 
 export const router = createBrowserRouter([
     {
@@ -16,5 +17,9 @@ export const router = createBrowserRouter([
     {
         path:'/register',
         element:<Register/>
+    },
+    {
+        path:'/all-songs',
+        element:<Protected><MusicLibrary/></Protected>
     }
 ])
