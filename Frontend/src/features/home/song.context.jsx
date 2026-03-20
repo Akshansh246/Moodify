@@ -5,12 +5,7 @@ export const SongContext = createContext()
 
 
 export const SongContextProvider = ({children}) => {
-    const [song, setSong] = useState({
-        "url": "https://ik.imagekit.io/devakshu/moodify/songs/Midnight_Rain_d0LJr4KAw.mp3",
-        "posterUrl": "https://ik.imagekit.io/devakshu/moodify/covers/Midnight_Rain_n79Ai1nSd.jpeg",
-        "title": "Midnight Rain",
-        "mood": "sad",
-    });
+    const [song, setSong] = useState(null);
     const [loading, setLoading] = useState(false);
 
     return(

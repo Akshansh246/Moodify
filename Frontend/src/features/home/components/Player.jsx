@@ -125,7 +125,7 @@ const Player = () => {
 
   if (loading || !song) {
     return (
-      <div className="bg-white p-4 rounded-3xl">
+      <div className="bg-white p-4 rounded-3xl text-3xl">
         <p>Loading...</p>
       </div>
     );
@@ -135,16 +135,16 @@ const Player = () => {
 
   return (
     <div className="bg-white p-4 rounded-3xl">
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-col lg:flex-row">
         <img
           src={song.posterUrl}
           alt={song.title}
-          className="w-75 h-75 rounded-xl object-cover"
+          className="w-full lg:w-75 lg:h-75 rounded-xl object-cover"
         />
         <div className="w-full text-center flex flex-col gap-3 justify-end">
           <div className="w-full flex items-center justify-center">
             <svg
-              className={`w-40 ${isPlaying ? "animate-spin" : ""}`}
+              className={`w-40 hidden lg:block ${isPlaying ? "animate-spin" : ""}`}
               viewBox="0 0 24 24"
               xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
               xmlns="http://www.w3.org/2000/svg"
@@ -214,7 +214,7 @@ const Player = () => {
               className="text-black/50"
             >
               <svg
-                className="w-10"
+                className="w-6 lg:w-10"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
@@ -226,7 +226,7 @@ const Player = () => {
             <button
               type="button"
               onClick={togglePlay}
-              className="bg-indigo-600 w-15 text-white cursor-pointer px-3 py-2 rounded-full text-4xl flex items-center justify-center"
+              className="bg-indigo-600 w-7 lg:w-15 text-white cursor-pointer px-5 lg:px-3 py-2 rounded-full text-xl lg:text-4xl flex items-center justify-center"
             >
               {isPlaying ? "⏸" : "▶"}
             </button>
@@ -237,7 +237,7 @@ const Player = () => {
               className="text-black/50"
             >
               <svg
-                className="w-10"
+                className="w-6 lg:w-10"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
