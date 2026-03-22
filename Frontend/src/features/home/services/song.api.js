@@ -16,3 +16,8 @@ export async function getAllSong() {
     return response.data
 }
 
+export async function getSongByID({id}) {
+    const response = await api.get(`/api/songs/get-song/${id}`)
+    return response.data
+}
+

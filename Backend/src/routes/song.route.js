@@ -24,4 +24,12 @@ songRouter.get('/', songController.getSongController)
  */
 songRouter.get('/all', songController.getAllSongController)
 
+/**
+ * @route /api/songs/get-song/:id
+ * @method GET
+ * @description returns song associated with the id
+ */
+songRouter.get('/get-song/:id', songController.getSongByIdController)
+
+
 module.exports = songRouter

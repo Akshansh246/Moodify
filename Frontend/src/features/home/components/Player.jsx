@@ -251,7 +251,7 @@ const Player = () => {
         </div>
       </div>
 
-      <audio ref={audioRef} className="hidden" preload="metadata" />
+      <audio ref={audioRef} className="hidden" preload="metadata" autoPlay />
     </div>
   );
 };

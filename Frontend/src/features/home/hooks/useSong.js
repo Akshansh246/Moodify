@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SongContext } from "../song.context";
-import { getAllSong, getSong } from "../services/song.api";
+import { getAllSong, getSong, getSongByID } from "../services/song.api";
 
 export const useSong = () => {
     const context = useContext(SongContext)
@@ -21,5 +21,12 @@ export const useSong = () => {
         setLoading(false)
     }
 
-    return ({song, loading, handleGetSong, handleAllSongs})
+    async function handleGetSongByID({id}) {
+        setLoading(true)
+        const data = await getSongByID({id})
+        setSong(data.song)
+        setLoading(false)
+    }
+
+    return ({song, loading, handleGetSong, handleAllSongs, handleGetSongByID})
 }

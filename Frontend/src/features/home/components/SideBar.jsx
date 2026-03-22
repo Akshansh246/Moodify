@@ -1,6 +1,8 @@
 import { NavLink } from "react-router";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 const SideBar = () => {
+    const {handleLogout} = useAuth()
     const linkBase =
         "flex items-center gap-2 p-3 rounded-l-lg cursor-pointer w-full transition";
 
@@ -53,7 +55,10 @@ const SideBar = () => {
                 <p className="hidden lg:block">Music Library</p>
             </NavLink>
 
-            <button className="flex items-center gap-2 p-3 rounded-l-lg cursor-pointer w-full hover:bg-white/20">
+            <button 
+            className="flex items-center gap-2 p-3 rounded-l-lg cursor-pointer w-full hover:bg-white/20"
+            onClick={handleLogout}
+            >
                 <svg
                 className=" w-6 lg:w-7"
                 xmlns="http://www.w3.org/2000/svg"

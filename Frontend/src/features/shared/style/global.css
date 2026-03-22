@@ -29,3 +29,12 @@ main{
     width: 8px;
     background-color: oklch(51.1% 0.262 276.966);
 }
+
+.left-bar{
+    clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);
+}
+
+.right-bar{
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%);
+
+}

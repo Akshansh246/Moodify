@@ -58,8 +58,20 @@ async function getAllSongController(req, res) {
     })
 }
 
+async function getSongByIdController(req, res) {
+    const {id} = req.params
+
+    const song = await songModel.findById(id)
+
+    res.status(200).json({
+        message:"Song Fetched Successfully.",
+        song
+    })
+}
+
 module.exports = {
     addSongController,
     getSongController,
-    getAllSongController
+    getAllSongController,
+    getSongByIdController
 }

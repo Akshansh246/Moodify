@@ -20,12 +20,12 @@ const Home = () => {
                         <p className='text-black/50'>Your Mood, Your Music.</p>
                     </div>
                     <div className='p-2 flex flex-col lg:flex-row gap-3 w-full'>
-                        <div className='w-80 lg:w-140'>
+                        <div className='w-72 lg:w-140 shadow-lg rounded-3xl'>
                             <FaceExpression
                             onClick={(expression)=>{ handleGetSong({mood:expression}) }}
                             />
                         </div>
-                        <div>
+                        <div className='rounded-2xl shadow-lg h-fit w-fit'>
                             <Player/>
                         </div>
                     </div>

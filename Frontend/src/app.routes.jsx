@@ -4,6 +4,7 @@ import Register from './features/auth/pages/Register'
 import Protected from './features/auth/components/Protected'
 import Home from './features/home/pages/Home'
 import MusicLibrary from './features/home/pages/MusicLibrary'
+import SongPlayer from './features/home/pages/SongPlayer'
 
 export const router = createBrowserRouter([
     {
@@ -21,5 +22,9 @@ export const router = createBrowserRouter([
     {
         path:'/all-songs',
         element:<Protected><MusicLibrary/></Protected>
+    },
+    {
+        path:'/song/:id',
+        element:<Protected><SongPlayer/></Protected>
     }
 ])
